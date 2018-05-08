@@ -15,7 +15,9 @@ class RouterConfig() {
 
     @Bean
     fun taskRoute(handler: TaskHandler): RouterFunction<ServerResponse> {
-        return route(GET("/tasks").and(accept(APPLICATION_JSON)),
-                HandlerFunction<ServerResponse>(handler::getAll))
+        return route(GET("/tasks"), HandlerFunction<ServerResponse>(handler::getAll))
+                .andRoute(POST("/tasks").and(accept(APPLICATION_JSON)), HandlerFunction<ServerResponse>(handler::save))
+                .andRoute(GET("/tasks/{id}"), HandlerFunction<ServerResponse>(handler::getOne))
+                .andRoute(DELETE("/tasks/{id}"), HandlerFunction<ServerResponse>(handler::delete))
     }
 }

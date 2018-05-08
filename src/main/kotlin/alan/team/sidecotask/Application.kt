@@ -7,8 +7,5 @@ import org.springframework.boot.runApplication
 class Application
 
 fun main(args: Array<String>) {
-//    val app = SpringApplication(Application::class.java)
-//    app.webApplicationType = WebApplicationType.REACTIVE
-//    app.run(*args)
     runApplication<Application>(*args)
 }
