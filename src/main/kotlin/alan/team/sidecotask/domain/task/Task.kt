@@ -4,8 +4,8 @@ import java.time.LocalDate
 
 data class Task(
         val id: Int?,
-        val _when: LocalDate?,
-        val who: String?,
-        val what: String?,
-        val howLong: Double?
+        val date: LocalDate?,
+        val personName: String?,
+        val taskName: String?,
+        val hourSpent: Double?
 )
