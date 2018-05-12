@@ -43,7 +43,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
-//	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	// workaround for Java 9
 	compileOnly 'javax.annotation:javax.annotation-api:1.3.1'
@@ -53,9 +52,10 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	// embedded Mongo
 	compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
-//	testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 	testCompile('org.assertj:assertj-core:3.9.1')
 }

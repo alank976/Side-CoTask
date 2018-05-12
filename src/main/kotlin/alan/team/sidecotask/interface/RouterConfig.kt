@@ -4,20 +4,26 @@ import alan.team.sidecotask.domain.task.TaskHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_JSON
-import org.springframework.web.reactive.function.server.HandlerFunction
-import org.springframework.web.reactive.function.server.RequestPredicates.*
-import org.springframework.web.reactive.function.server.RouterFunction
-import org.springframework.web.reactive.function.server.RouterFunctions.route
-import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.router
 
 @Configuration
-class RouterConfig() {
-
+class RouterConfig {
+    /**
+     * https://github.com/mixitconf/mixit/blob/master/src/main/kotlin/mixit/web/routes/ApiRoutes.kt
+     **/
     @Bean
-    fun taskRoute(handler: TaskHandler): RouterFunction<ServerResponse> {
-        return route(GET("/tasks"), HandlerFunction<ServerResponse>(handler::getAll))
-                .andRoute(POST("/tasks").and(accept(APPLICATION_JSON)), HandlerFunction<ServerResponse>(handler::save))
-                .andRoute(GET("/tasks/{id}"), HandlerFunction<ServerResponse>(handler::getOne))
-                .andRoute(DELETE("/tasks/{id}"), HandlerFunction<ServerResponse>(handler::delete))
+    fun apiRouter(handler: TaskHandler) = router {
+        "/api".nest {
+            (accept(APPLICATION_JSON) and "/v1").nest {
+                "/tasks".nest {
+                    GET("/", handler::getAll)
+                    POST("/", handler::save)
+                    "/{id}".nest {
+                        GET("/", handler::getOne)
+                        DELETE("/", handler::delete)
+                    }
+                }
+            }
+        }
     }
 }
