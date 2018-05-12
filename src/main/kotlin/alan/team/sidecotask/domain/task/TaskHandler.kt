@@ -16,26 +16,29 @@ class TaskHandler(val repository: TaskRepository) {
     }
 
     fun getOne(request: ServerRequest): Mono<ServerResponse> {
-        val id = Integer.parseInt(request.pathVariable("id"))
-        return repository.findById(id)
+        val id = request.pathVariable("id")
+        return repository
+                .findById(id)
                 .flatMap { t ->
                     ServerResponse.ok().body(Mono.just(t), Task::class.java)
                 }
+                .switchIfEmpty(ServerResponse.notFound().build())
+
     }
 
     fun save(request: ServerRequest): Mono<ServerResponse> {
         return request.bodyToMono(Task::class.java)
                 .flatMap { t -> repository.save(t) }
                 .flatMap { t ->
-                    ServerResponse.created(URI.create("/tasks/" + t.id))
+                    ServerResponse.created(URI.create("/api/v1/tasks/" + t.id))
                             .body(Mono.just(t), Task::class.java)
                 }
+                .switchIfEmpty(ServerResponse.badRequest().build())
     }
 
     fun delete(request: ServerRequest): Mono<ServerResponse> {
-        val id = Integer.parseInt(request.pathVariable("id"))
+        val id = request.pathVariable("id")
         return repository.deleteById(id)
-                .flatMap { ServerResponse.ok().build() }
-                .switchIfEmpty(ServerResponse.noContent().build())
+                .then(ServerResponse.ok().build())
     }
 }
