@@ -1,6 +1,6 @@
-package alan.team.sidecotask.`interface`
+package alan.team.sidekotask.`interface`
 
-import alan.team.sidecotask.domain.task.TaskHandler
+import alan.team.sidekotask.domain.task.TaskHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_JSON

@@ -1,6 +1,6 @@
-package alan.team.sidecotask
+package alan.team.sidekotask
 
-import alan.team.sidecotask.domain.task.Task
+import alan.team.sidekotask.domain.task.Task
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

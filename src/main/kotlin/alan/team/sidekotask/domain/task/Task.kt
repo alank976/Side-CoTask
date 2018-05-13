@@ -1,4 +1,4 @@
-package alan.team.sidecotask.domain.task
+package alan.team.sidekotask.domain.task
 
 import org.springframework.data.annotation.Id
 import java.time.LocalDate

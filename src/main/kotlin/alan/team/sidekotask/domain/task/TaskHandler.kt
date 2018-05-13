@@ -1,4 +1,4 @@
-package alan.team.sidecotask.domain.task
+package alan.team.sidekotask.domain.task
 
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component

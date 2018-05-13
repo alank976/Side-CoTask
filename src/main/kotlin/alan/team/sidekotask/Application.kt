@@ -1,4 +1,4 @@
-package alan.team.sidecotask
+package alan.team.sidekotask
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
